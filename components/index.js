@@ -3,3 +3,7 @@
 export { default as OstMask } from './OstMask';
 export { default as OstLoading } from './OstLoading';
 export { default as OstPopup } from './OstPopup';
+export { default as OstText } from './OstText';
+export { default as OstWhiteSpace } from './OstWhiteSpace';
+export { default as OstWhiteBlank } from './OstWhiteBlank';
+export { default as OstButton } from './OstButton';
