@@ -1,8 +1,15 @@
 import React from 'react';
-// import { OstDemo } from 'components';
-import { mount, shallow } from 'enzyme';
+import Factory from '../utils/factory';
+import { OstDemo } from 'components';
+import { shallow } from 'enzyme';
 
-it('render demo correctly', function() {
-  // const componet = shallow(<OstDemo/>);
-  // expect(this.component.find('.ost-loading')).to.exist;
+export default describe('OstDemo test', function() {
+  beforeEach(function() {
+    Factory.destroyAppContainer();
+  });
+  it('render demo correctly', function() {
+    const component = shallow(<OstDemo/>);
+    Factory.createComponent(component);
+    expect(component.find('.ost-demo')).to.exist;
+  });
 });

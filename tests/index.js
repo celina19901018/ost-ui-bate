@@ -1,11 +1,8 @@
 import 'babel-polyfill';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Factory from './utils/factory';
 
 Enzyme.configure({ adapter: new Adapter() });
-Factory.createRoot;
-
 /**
  * require all files that need to test those ends with `.spec.js`
  */
