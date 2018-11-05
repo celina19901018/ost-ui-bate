@@ -36,6 +36,10 @@
     {
       "name": "guibw",
       "email": "228474838@qq.com"
+    },
+    {
+      "name": "leotw",
+      "email": "1123978215@qq.com"
     }
   ],
   "license": "MIT",
@@ -93,6 +97,7 @@
     "react-route": "^1.0.3",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "sinon": "^7.0.0",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.16.0",
