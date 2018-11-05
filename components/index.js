@@ -3,3 +3,4 @@
 export { default as OstMask } from './OstMask';
 export { default as OstLoading } from './OstLoading';
 export { default as OstPopup } from './OstPopup';
+export { default as OstDemo } from './OstDemo';
