@@ -1,15 +1,13 @@
 import React from 'react';
-import Factory from '../utils/factory';
+import Factory, { destroyElement } from '../utils/factory';
 import { OstDemo } from 'components';
-import { shallow } from 'enzyme';
 
-export default describe('OstDemo test', function() {
-  beforeEach(function() {
-    Factory.destroyAppContainer();
+export default describe('OstDemo test section', function() {
+  after(function() {
+    destroyElement('#App');
   });
   it('render demo correctly', function() {
-    const component = shallow(<OstDemo/>);
-    Factory.createComponent(component);
-    expect(component.find('.ost-demo')).to.exist;
+    const component = Factory.createComponent(<OstDemo/>);
+    expect(component.find('.ost-demo').exists()).to.equal(true);
   });
 });

@@ -1,65 +1,86 @@
 import React from 'react';
+import { mount, shallow } from 'enzyme';
+import sinon from 'sinon';
 import { OstLoading } from 'components';
-import { mount } from 'enzyme';
-import Factory, { destroyElement } from "../utils/factory";
+import { destroyElement } from '../utils/factory';
 
-export default describe('OstLoading test', function() {
+export default describe('OstLoading test section', function() {
 
-  let component;
-
-  const state = {
-    isLoading: true
+  /**
+   * 组件的模拟点击环境
+   * @param props
+   * @returns {ReactComp}
+   * @constructor
+   */
+  const TestContent = (props) => {
+    const { closeCb, openCb } = props;
+    return (
+      <div className="loading-test">
+        <button id="closeBtn" onClick={closeCb}>off</button>
+        <button id="openBtn" onClick={openCb}>open</button>
+      </div>
+    )
   };
 
-  before(function() {
-    const TestContent = (props) => {
-      return (
-        <div className="loading-test">
-          <OstLoading isLoading={props.isLoading}/>
-          <button id="closeBtn" onClick={testCloseCallback}>off</button>
-          <button id="openBtn" onClick={testOpenCallback}>open</button>
-        </div>
-      )
-    };
-    this.component = mount(<TestContent isLoading={state.isLoading}/>);
-    component = this.component;
-  });
-
-  function testCloseCallback() {
-    component.setProps({
-      isLoading: false
-    });
-  }
-
-  function testOpenCallback() {
-    component.setProps({
-      isLoading: true
-    });
-  }
-
   after(function() {
+    /* 销毁DOM环境下的OstLoading产生的html */
     destroyElement('#ost-mask-container');
   });
 
   it('render <OstLoading> correctly', function() {
-    expect(component.find('.ost-loading')).to.exist;
+    const component = shallow(<OstLoading isLoading={true}/>);
+    expect(component.exists()).to.equal(true);
   });
 
-  it('close <OstLoading> Component', function(done) {
-    component.find('.loading-test #closeBtn').simulate('click');
+  it('close <OstLoading> correctly', function(done) {
+
+    /* OstLoading组件深层渲染 */
+    let isLoading = true;
+    const component = mount(<OstLoading isLoading={isLoading}/>);
+
+    /* 使用spy对closeLoading方法做监听 */
+    const cb = sinon.spy(closeLoading);
+    const ctrl = mount(<TestContent closeCb={cb}/>);
+    ctrl.find('#closeBtn').simulate('click');
+
+    /* 进行模拟点击后测试closeLoading的方法调用次数 */
+    expect(cb.callCount).to.equal(1);
     setTimeout(function() {
-      expect(component.find('.ost-loading').exists()).to.equal(false);
-      expect(component.find('.ost-mask').exists()).to.equal(false);
+      expect(component.props().isLoading).to.equal(false);
       done();
     }, 500);
+
+    /* 关闭OstLoading组件的方法 */
+    function closeLoading() {
+      component.setProps({
+        isLoading: false
+      });
+    }
   });
 
-  it('open <OstLoading> Component', function(done) {
-    component.find('.loading-test #openBtn').simulate('click');
+  it('open <OstLoading> correctly', function(done) {
+
+    /* OstLoading组件深层渲染 */
+    let isLoading = false;
+    const component = mount(<OstLoading isLoading={isLoading}/>);
+
+    /* 使用spy对closeLoading方法做监听 */
+    const cb = sinon.spy(openLoading);
+    const ctrl = mount(<TestContent openCb={cb}/>);
+    ctrl.find('#openBtn').simulate('click');
+
+    /* 进行模拟点击后测试openLoading的方法调用次数 */
+    expect(cb.callCount).to.equal(1);
     setTimeout(function() {
-      expect(component.find('.ost-loading').exists()).to.equal(true);
-      expect(component.find('.ost-mask').exists()).to.equal(true);
+      expect(component.props().isLoading).to.equal(true);
       done();
-    }, 500);
+    }, 1000);
+
+    /* 打开OstLoading组件的方法 */
+    function openLoading() {
+      component.setProps({
+        isLoading: true
+      });
+    }
   });
 })
