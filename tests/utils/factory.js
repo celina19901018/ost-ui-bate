@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { shallow, mount } from "enzyme";
 
 let id = 0;
 
@@ -13,6 +14,7 @@ class Factory {
   createAppContainer() {
     const ele = document.createElement('div');
     ele.id = this.appId + (++id);
+    ele.key = ele.id;
     this.appContainer = ele;
     this.appContainers.push(ele);
     document.body.appendChild(ele);
@@ -20,10 +22,9 @@ class Factory {
 
   createComponent(comp) {
     this.createAppContainer();
-    ReactDOM.render(
-      comp,
-      this.appContainer
-    );
+    return mount(comp, {
+      attachTo: this.appContainer
+    });
   }
 
   destroyAppContainer(isAll) {
@@ -34,6 +35,21 @@ class Factory {
     } else {
       this.appContainer && this.appContainer.remove();
     }
+  }
+
+  shallowDefault(Comp, props = {}, Container = null) {
+    return shallow(
+      <Comp {...props}/>
+    );
+  }
+
+  mountDefault(Comp, props = {}, Container = null) {
+    return Container ?
+      mount(
+        <Container>
+          <Comp {...props}/>
+        </Container>) :
+      mount(<Comp {...props}/>);
   }
 }
 
