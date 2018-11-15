@@ -10,7 +10,7 @@ export default describe('OstMask test section', function() {
    * 组件的模拟点击环境
    * @param props
    * @returns {ReactComp}
-   * @constructor
+   * @constructorn
    */
   const TestContent = (props) => {
     const { closeCb, openCb } = props;
