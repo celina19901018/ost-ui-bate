@@ -9,7 +9,7 @@ export default class EnzymeExtend {
   }
 
   createContainerDom(comp) {
-    this.container = componetWrapper[Symbol.for('enzyme.__node__')].rendered.instance.container;
+    this.container = componetWrapper[Symbol.for('enzyme.__node__')].instance.componentDidMount
   }
 
   get reactContainerDom() {

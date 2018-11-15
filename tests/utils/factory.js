@@ -80,4 +80,22 @@ export const destroyElement = (select) => {
   });
 };
 
+export const createEvent = (name, ele, opt = {}) => {
+  let eventType;
+  switch(name) {
+    case /^mouse|click/.test(name):
+      eventType = 'MouseEvents';
+      break;
+    case /^key/.test(name):
+      eventType = 'KeyboardEvent';
+      break;
+    default:
+      eventType = 'HTMLEvents';
+  }
+  const evt = document.createEvent(eventType);
+  evt.initEvent(name, ...opt);
+  ele.dispatchEvent ? ele.dispatchEvent(evt) : ele.fireEvent('on' + name, evt);
+  return ele;
+};
+
 export default new Factory();
