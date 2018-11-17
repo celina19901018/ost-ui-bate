@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { shallow, mount } from "enzyme";
 
 let id = 0;
@@ -96,6 +95,14 @@ export const createEvent = (name, ele, opt = {}) => {
   evt.initEvent(name, ...opt);
   ele.dispatchEvent ? ele.dispatchEvent(evt) : ele.fireEvent('on' + name, evt);
   return ele;
+};
+
+export const defer = (delay = 0) => {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve()
+    }, delay);
+  })
 };
 
 export default new Factory();
