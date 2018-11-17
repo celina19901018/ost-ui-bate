@@ -6,14 +6,14 @@ export default (params, error = false) => {
           status: 500,
           message: 'bad'
         })
-      }, 3500);
+      }, 1000);
     } else {
       setTimeout(function() {
         resolve({
           status: 200,
           message: 'Jane'
         })
-      }, 2500);
+      }, 500);
     }
   })
 }

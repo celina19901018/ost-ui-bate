@@ -1,6 +1,5 @@
 import React from 'react';
 import Factory, { destroyElement, createEvent } from '../utils/factory';
-import { mount } from 'enzyme';
 import { OstDemo } from 'components';
 
 export default describe('OstDemo test section', function() {
@@ -48,19 +47,18 @@ export default describe('OstDemo test section', function() {
     }, 500);
   });
 
-  it('should request correctly', function() {
+  it('should request correctly', function(done) {
     const instance = new OstDemo();
     instance.requestHandler({})
       .then(rsp => {
         expect(rsp.message).to.equal('Jane');
-      });
-    instance.requestHandler({}, true)
-      .then(res => {
-        expect(res.message).to.equal('Jane');
+        return instance.requestHandler({}, true)
       })
-      .catch(err => {
+      .then(null, err => {
         expect(err.message).to.equal('bad');
         expect(err.status).to.equal(500);
+        done();
       })
+      .catch(done);
   })
 });
