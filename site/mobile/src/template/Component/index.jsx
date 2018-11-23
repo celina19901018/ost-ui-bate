@@ -16,7 +16,12 @@ export default class Component extends React.Component {
 
     import(`../../../../../components`).then(Module =>{
       Object.keys(Module).forEach(_key => {
-        import(`../../../../../components/${_key}/demo/README.md`).then(md =>  md.default).then(data => this.kitchenMd(data, _key, Module));
+
+        if (/MENU_ITEM*./ig.test(_key)) return;
+
+        import(`../../../../../components/${_key}/demo/README.md`)
+        .then(md =>  md.default)
+        .then(data => this.kitchenMd(data, _key, Module));
       });
     });
 

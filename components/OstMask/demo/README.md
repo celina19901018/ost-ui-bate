@@ -1,5 +1,7 @@
 ## OstMask 示例
 
+淡入淡出效果蒙层，同时可以防止移动端滚动穿透；
+
 ```jsx
 :::$demo
     constructor(props) {
