@@ -34,11 +34,18 @@ export default class Component extends React.Component {
 
     if (!data.match(demoRex)) return;
 
-    let _htmlStr = '';
+    let _componentStr = '';
+    let _domStr = '';
 
-    data.match(demoRex).forEach(ele => {
+    data.match(demoRex).forEach((ele, i) => {
       const _demo = ele.replace(demoFlagRex, '');
-      _htmlStr += _demo;
+
+      const cptStr =  `class Cpt${i} extends React.Component {
+            ${_demo}
+      }`
+
+        _componentStr  += cptStr;
+        _domStr += `<Cpt${i}/>`;
     })
 
     const args = ['context', 'React', 'ReactDOM'];
@@ -50,10 +57,14 @@ export default class Component extends React.Component {
     }
 
     const code = transform(`
-    class Demo extends React.Component {
-          ${_htmlStr}
-    }
+      ${_componentStr}
 
+      class Demo extends React.Component {
+          render() {
+            return <div> ${_domStr} </div>
+          }
+      }
+    
     ReactDOM.render(<Demo {...context.props} />, document.getElementById('ost-phone-demo'))`, {
         presets: ['es2015', 'react']
     }).code;
