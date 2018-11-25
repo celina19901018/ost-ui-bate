@@ -9,6 +9,7 @@ export default class Component extends React.Component {
     // console.log('phone location===>', window.location.href);
     // console.log('phone history.length===>', window.history.length);
     // console.log('phone hash===>', window.location.hash);
+    this.state = { styleStr: '' };
     this.importMd();
   }
 
@@ -27,12 +28,29 @@ export default class Component extends React.Component {
 
   }
 
+  getStyleStr = data => {
+    const demoStyleRex = /<style>[^]+?<\/style>/g;
+    const demoStyleFlagRex = /<style>|<\/style>/g;
+
+    if (!data.match(demoStyleRex)) return;
+
+    let _styleStr = '';
+
+    data.match(demoStyleRex).forEach((ele, i) => {
+      _styleStr += ele.replace(demoStyleFlagRex, '');
+    })
+
+    this.setState({styleStr: _styleStr});
+  }
+
   kitchenMd = (data, key, Module) => {
     if (window.location.hash.substring(2)!==key) return;
     const demoRex = /:::\s?\$demo\s?([^]+?):::\$/g;
     const demoFlagRex = /:::\s?\$demo|:::\$/g;
 
     if (!data.match(demoRex)) return;
+
+    this.getStyleStr(data); //渲染样式
 
     let _componentStr = '';
     let _domStr = '';
@@ -76,15 +94,19 @@ export default class Component extends React.Component {
 
   componentWillUnmount() {
     const dom = document.getElementById('ost-phone-demo');
+    const styleDom = document.getElementById('ost-phone-demo-style');
     ReactDOM.unmountComponentAtNode(dom);
+    ReactDOM.unmountComponentAtNode(styleDom);
   }
 
   render() {
     const {history} = this.props;
+    const {styleStr} = this.state;
 
     return (
       <div className="ost-component">
         <div className="ost-component-content" id='ost-phone-demo' />
+        {styleStr ? <style dangerouslySetInnerHTML={{ __html: styleStr }} id='ost-phone-demo-style' /> : null}
       </div>
     );
   }
