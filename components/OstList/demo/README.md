@@ -25,7 +25,7 @@
                 <OstList title='列表标题1'>
                     <OstList.item arrowTo={turnOn ? 'bottom' : 'top'} onClick={()=>this.setState({turnOn: !turnOn})} text="点击切换" />
                 </OstList>
-                <OstList title='列表标题2'  tips={()=> {}}>
+                <OstList title='列表标题2'  tips={()=> {console.log('tips!!!')}}>
                     <OstList.item arrowTo={'right'} text="提示" />
                 </OstList>
             </OstList.card>,

@@ -42,4 +42,63 @@
       height: 14 * @BU;
     }
   }
+
+  &-sixBitCode {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    @borderStyle: .5 * @BU solid #BCBCBC;
+
+    &-fakeInput {
+      width: 48 * @BU;
+      height: 46 * @BU;
+      line-height: 46 * @BU;
+      text-align: center;
+      font-size: 22 * @BU;
+      color: #333;
+      background: #FFFFFF;
+      border-top: @borderStyle;
+      border-bottom: @borderStyle;
+      border-left: @borderStyle;
+      position: relative;
+    }
+
+    &-fakeInput:first-child {
+      border-top-left-radius: 3 * @BU;
+      border-bottom-left-radius: 3 * @BU;
+    }
+
+    &-fakeInput:last-child {
+      border-right: @borderStyle;
+      border-top-right-radius: 3 * @BU;
+      border-bottom-right-radius: 3 * @BU;
+    }
+
+    &-fakeInput-onFocus::after {
+      content: "";
+      position: absolute;
+      right: 50%;
+      top: 25%;
+      height: 50%;
+      border-right: 2 * @BU solid #FF6D00;
+      -webkit-animation: keyboard-cursor infinite 1s step-start;
+      animation: keyboard-cursor infinite 1s step-start;
+    }
+
+    @keyframes keyboard-cursor {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
 }

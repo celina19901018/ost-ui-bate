@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import arrowRightSvg from './arrowRight.svg';
 import arrowBottomSvg from './arrowBottom.svg';
 import arrowTopSvg from './arrowTop.svg';
+import tipsIconSvg from './tipsIcon.svg';
 
 
 class Item extends Component {
@@ -66,9 +67,15 @@ export default class OstList extends Component {
       <div className="ost-card-list" style={style}>
         <div className="ost-card-list-title" style={{width: desc ? '100%' : null }}>
           <div className="ost-card-list-title-box">
-            <span>
+            <span className="ost-card-list-title-box-text">
               {title}
-              {tips && <i onClick={() => {tips.onClick && tips.onClick()}}/>}
+              {
+                tips && 
+                <img
+                  src={tipsIconSvg}
+                  onClick={() => {tips && tips()}} 
+                  className="ost-card-list-title-box-tips"/>
+              }
             </span>
             {desc && <p className="ost-card-list-title-desc"> {desc} </p>}
           </div>

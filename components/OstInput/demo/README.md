@@ -5,11 +5,15 @@
 :::$demo
     constructor(props) {
         super(props);
-        this.state = { value: '' };
+        this.state = { 
+            value: '', 
+            sixBitValue: '',
+            showKeyBoard: false 
+        };
     }
 
     render() {
-        const { value } = this.state;
+       const { value, sixBitValue } = this.state;
 
        return([
         
@@ -30,8 +34,32 @@
                 onDel={()=>this.setState({value: ''})}
                 onChange={e => this.setState({value: e.currentTarget.value})} />
           </OstList>
-        </OstList.card>
+        </OstList.card>,
 
+        <OstList.card title="6位数字输入框" key='2'>
+            <OstInput.sixBit
+                style={{padding: '10px 0'}}
+                autoFocus={false}
+                value={sixBitValue}
+                onChange={(v) => {
+                    console.log('onChange>>>', v)
+                }}
+                onBlur={(v) => {
+                    this.setState({showKeyBoard: false});
+                    console.log('onBlur callback>>>', v);
+                }}
+                onFocus={(v) => {
+                    this.setState({showKeyBoard: true});
+                    console.log('onFocus callback>>>', v);
+                }}
+             >
+             </OstInput.sixBit>
+        </OstList.card>,
+        <OstNumKeyboard
+            key='3'
+            maxLength='6'
+            show={this.state.showKeyBoard} 
+            onChange={v => this.setState({sixBitValue: v})} />
        ])
     }
 :::$

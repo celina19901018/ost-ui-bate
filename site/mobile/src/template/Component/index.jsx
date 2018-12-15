@@ -95,8 +95,8 @@ export default class Component extends React.Component {
   componentWillUnmount() {
     const dom = document.getElementById('ost-phone-demo');
     const styleDom = document.getElementById('ost-phone-demo-style');
-    ReactDOM.unmountComponentAtNode(dom);
-    ReactDOM.unmountComponentAtNode(styleDom);
+    dom && ReactDOM.unmountComponentAtNode(dom);
+    styleDom && ReactDOM.unmountComponentAtNode(styleDom);
   }
 
   render() {
