@@ -19,28 +19,30 @@ class Basic extends Component {
     return (
       <OstMask show={show} >
         <div className="ost-modal-basic">
-          <p className="ost-modal-basic-primary">
-            {text.primary || ''}
-          </p>
-          <p className="ost-modal-basic-secondary">
-            {text.secondary || ''}
-          </p>
-          {
-            button && button[0] &&
-            <div className="ost-modal-basic-priBtn">
-              <button ref='priBtn' onClick={button[0].onPress}>
-                {button[0].text}
-              </button>
-            </div>
-          }
-          {
-            button && button[1] &&
-            <div className="ost-modal-basic-secBtn">
-              <button ref='secBtn' onClick={button[1].onPress}>
-                {button[1].text}
-              </button>
-            </div>
-          }
+          <div className="ost-modal-basic-box">
+            <p className="ost-modal-basic-primary">
+              {text.primary || ''}
+            </p>
+            <p className="ost-modal-basic-secondary">
+              {text.secondary || ''}
+            </p>
+            {
+              button && button[0] &&
+              <div className="ost-modal-basic-priBtn">
+                <button ref='priBtn' onClick={button[0].onPress}>
+                  {button[0].text}
+                </button>
+              </div>
+            }
+            {
+              button && button[1] &&
+              <div className="ost-modal-basic-secBtn">
+                <button ref='secBtn' onClick={button[1].onPress}>
+                  {button[1].text}
+                </button>
+              </div>
+            }
+          </div>
         </div>
       </ OstMask>
     );

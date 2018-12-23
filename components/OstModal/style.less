@@ -1,14 +1,18 @@
 .ost-modal {
   &-basic {
     width: 260 * @BU;
+    min-width: 260 * @BU;
     height: auto;
     background: #fff;
     box-shadow: 0 0 20 * @BU 0 rgba(0, 0, 0, 0.10);
     border-radius: 8 * @BU;
-    padding: 40 * @BU 25 * @BU 25 * @BU 25 * @BU;
     display: flex;
     flex-direction: column;
 
+    &-box {
+        padding: 40 * @BU 25 * @BU 25 * @BU 25 * @BU;
+    }
+    
     &-primary {
       font-family: PingFangSC-Medium;
       font-size: 16 * @BU;

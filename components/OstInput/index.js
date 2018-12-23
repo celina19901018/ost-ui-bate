@@ -168,7 +168,10 @@ class OstInput extends Component {
       onDel,
       placeholder,
       disabled,
-      type
+      type,
+      maxLength,
+      onBlur,
+      onFocus
     } = this.props;
 
     return (
@@ -182,17 +185,22 @@ class OstInput extends Component {
           type={type || "text"}
           disabled={disabled}
           defaultValue={defaultValue}
-          value={value}
+          value={(maxLength && value) ? value.slice(0, maxLength) : value}
           onBlur={()=>{
-            
+
             const _this = this;
 
             setTimeout(() => {
+
+            onBlur && onBlur();
               
             _this.setState({closeBtn: false}) 
             }, 300);
           }}
-          onFocus={()=>{ this.setState({closeBtn: true}) }}
+          onFocus={()=>{
+             onFocus && onFocus();
+             this.setState({closeBtn: true}) 
+          }}
           onChange={e=> onChange && onChange(e)}
           placeholder={placeholder}
         />

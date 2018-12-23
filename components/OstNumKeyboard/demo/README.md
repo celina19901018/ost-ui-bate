@@ -2,8 +2,9 @@
 
   
 ```jsx
-:::$demo
+class OstNumKeyboard extends Component {
 
+:::$demo
     constructor(props) {
         super(props);
         this.state = {
@@ -21,4 +22,6 @@
        )
     }
 :::$
+
+}
 ```

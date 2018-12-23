@@ -3,36 +3,28 @@
   
 ```jsx
 :::$demo
-    constructor(props) {
-        super(props);
-        this.state = { value: '' };
-    }
 
     render() {
-        const { value } = this.state;
 
-       return([
+       return(
+        <div>
         
-        <OstList.card title="输入框" key='0'>
-          <OstList title='标准输入'>
-            <OstInput placeholder='请输入' />
-          </OstList>
-          <OstList title='不可输入'>
-            <OstInput defaultValue='禁用' disabled />
-          </OstList>
-        </OstList.card>,
+            <OstHeader title='头部' />
 
-        <OstList.card title="输入框" key='1'>
-          <OstList title='请输入测试内容'>
-            <OstInput
-                placeholder='请输入' 
-                value={value}
-                onDel={()=>this.setState({value: ''})}
-                onChange={e => this.setState({value: e.currentTarget.value})} />
-          </OstList>
-        </OstList.card>
+            <OstHeader
+                title='头部-自定义返回'
+                leftOpt={{
+                    onClick: ()=> alert('自定义返回')
+                }}
+                style={{ boxShadow: '0 0 0 0 rgba(0,0,0,0)', top: '60px' }}/>
 
-       ])
+            <OstHeader
+                title='头部-修改默认样式'
+                titleStyle={{color: '#fff' }}
+                style={{ background: '#3f7ae7', top: '120px'}} />
+
+        </div>
+       )
     }
 :::$
 ```

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class OstHeader extends Component {
   render() {
-    const { title, leftOpt, style} = this.props;
+    const { title, leftOpt, style, titleStyle} = this.props;
 
     return (
       [
@@ -20,7 +20,7 @@ class OstHeader extends Component {
             }}>
             <i />
           </div>
-          <div className="ost-header-title">{title}</div>
+          <div className="ost-header-title" style={titleStyle}>{title}</div>
           <div className={"ost-header-right"} />
         </div>,
         <div key='1' className="ost-header-height-polyfill" />

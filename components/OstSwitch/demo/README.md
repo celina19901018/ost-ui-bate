@@ -1,38 +1,69 @@
 ## OstLoading 示例
 
+  ### 默认选中示例
+
+```jsx
+:::$demo
+
+    render() {
+       return( 
+        <OstList.card>
+        <OstList title='默认选中'>
+            <div className="alignCenter">
+                <OstSwitch defaultChecked onClick={ck => console.log(ck)} />
+            </div>
+        </OstList>
+        </OstList.card>
+       )
+    }
+:::$
+```
+
+### 默认未选示例
   
 ```jsx
 :::$demo
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: false
-        }
-    }
-
     render() {
        return( 
-            <div style={{
-                    width: '100%',
-                    padding: '10px'
-            }}>
-                <button
-                    style={{
-                        width: 'calc(100% - 20px)',
-                        height: '44px',
-                        position: 'fixed',
-                        bottom: '10px',
-                        zIndex: '10000',
-                        fontSize: '14px',
-                        background: '#fff'
-                    }}
-                    onClick={()=>this.setState({isLoading: !this.state.isLoading})} > 
-                    {this.state.isLoading ? '关闭 Loading' : '显示 Loading'}
-                </button>
-                <OstLoading isLoading={this.state.isLoading} />
+        <OstList.card>
+        <OstList title='默认未选'>
+            <div className="alignCenter">
+                <OstSwitch defaultChecked={false} onClick={ck => console.log(ck)} />
             </div>
+        </OstList>
+        </OstList.card>
        )
     }
 :::$
+```
+
+### 禁止点击示例
+
+```jsx
+:::$demo
+
+    render() {
+       return( 
+        <OstList.card>
+        <OstList title='不可选择'>
+            <div className="alignCenter">
+                <OstSwitch defaultChecked disabled onClick={ck => console.log(ck)} />
+            </div>
+        </OstList>
+        </OstList.card>
+       )
+    }
+:::$
+```
+
+```css
+<style>
+.alignCenter {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+</style>
+
 ```

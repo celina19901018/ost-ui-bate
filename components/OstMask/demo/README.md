@@ -41,7 +41,9 @@
     width: 100%;
     height: 44px;
     font-size: 14px;
-    background: #fff;
+    background: #FF6D00;
+    color: #fff;
+    border-radius: 100px;
 }
 .ost-mask-demo-text {
     color: #fff;
