@@ -1,9 +1,9 @@
-# OST UI 移动端组件库
----
 [![codecov](https://codecov.io/gh/Ironsub/ost-ui-bate/branch/develop_travis/graph/badge.svg)](https://codecov.io/gh/Ironsub/ost-ui-bate)
 [![Build Status](https://travis-ci.org/Ironsub/ost-ui-bate.svg?branch=develop_travis)](https://travis-ci.org/Ironsub/ost-ui-bate)
 [![npm package](https://img.shields.io/npm/v/ost-ui.svg?style=flat-square)](https://www.npmjs.com/package/ost-ui)
 [![npm downloads](https://img.shields.io/npm/dm/ost-ui.svg)](https://www.npmjs.com/package/ost-ui)
+# OST UI 移动端组件库
+---
 
 <br/>
 
