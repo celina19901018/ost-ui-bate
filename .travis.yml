@@ -26,6 +26,7 @@ before_install:
 
 install:
   - npm install
+  - npm install -g codecov
 
 script:
   - |
@@ -36,6 +37,8 @@ script:
     elif [ "$TEST_TYPE" = test ]; then
       npm run test
     fi
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - codecov
 
 branches:
   only:
