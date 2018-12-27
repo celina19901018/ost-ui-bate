@@ -9,6 +9,7 @@ export default class Component extends React.Component {
     // console.log('phone location===>', window.location.href);
     // console.log('phone history.length===>', window.history.length);
     // console.log('phone hash===>', window.location.hash);
+    this.state = { styleStr: '' };
     this.importMd();
   }
 
@@ -16,10 +17,30 @@ export default class Component extends React.Component {
 
     import(`../../../../../components`).then(Module =>{
       Object.keys(Module).forEach(_key => {
-        import(`../../../../../components/${_key}/demo/README.md`).then(md =>  md.default).then(data => this.kitchenMd(data, _key, Module));
+
+        if (/MENU_ITEM*./ig.test(_key)) return;
+
+        import(`../../../../../components/${_key}/demo/README.md`)
+        .then(md =>  md.default)
+        .then(data => this.kitchenMd(data, _key, Module));
       });
     });
 
+  }
+
+  getStyleStr = data => {
+    const demoStyleRex = /<style>[^]+?<\/style>/g;
+    const demoStyleFlagRex = /<style>|<\/style>/g;
+
+    if (!data.match(demoStyleRex)) return;
+
+    let _styleStr = '';
+
+    data.match(demoStyleRex).forEach((ele, i) => {
+      _styleStr += ele.replace(demoStyleFlagRex, '');
+    })
+
+    this.setState({styleStr: _styleStr});
   }
 
   kitchenMd = (data, key, Module) => {
@@ -29,11 +50,20 @@ export default class Component extends React.Component {
 
     if (!data.match(demoRex)) return;
 
-    let _htmlStr = '';
+    this.getStyleStr(data); //渲染样式
 
-    data.match(demoRex).forEach(ele => {
+    let _componentStr = '';
+    let _domStr = '';
+
+    data.match(demoRex).forEach((ele, i) => {
       const _demo = ele.replace(demoFlagRex, '');
-      _htmlStr += _demo;
+
+      const cptStr =  `class Cpt${i} extends React.Component {
+            ${_demo}
+      }`
+
+        _componentStr  += cptStr;
+        _domStr += `<Cpt${i}/>`;
     })
 
     const args = ['context', 'React', 'ReactDOM'];
@@ -45,10 +75,14 @@ export default class Component extends React.Component {
     }
 
     const code = transform(`
-    class Demo extends React.Component {
-          ${_htmlStr}
-    }
+      ${_componentStr}
 
+      class Demo extends React.Component {
+          render() {
+            return <div> ${_domStr} </div>
+          }
+      }
+    
     ReactDOM.render(<Demo {...context.props} />, document.getElementById('ost-phone-demo'))`, {
         presets: ['es2015', 'react']
     }).code;
@@ -60,15 +94,19 @@ export default class Component extends React.Component {
 
   componentWillUnmount() {
     const dom = document.getElementById('ost-phone-demo');
-    ReactDOM.unmountComponentAtNode(dom);
+    const styleDom = document.getElementById('ost-phone-demo-style');
+    dom && ReactDOM.unmountComponentAtNode(dom);
+    styleDom && ReactDOM.unmountComponentAtNode(styleDom);
   }
 
   render() {
     const {history} = this.props;
+    const {styleStr} = this.state;
 
     return (
       <div className="ost-component">
         <div className="ost-component-content" id='ost-phone-demo' />
+        {styleStr ? <style dangerouslySetInnerHTML={{ __html: styleStr }} id='ost-phone-demo-style' /> : null}
       </div>
     );
   }

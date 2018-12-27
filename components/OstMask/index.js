@@ -61,7 +61,7 @@ export default class OstMask extends Component {
   }
 
   getComponent = () => {
-    const {show, onClick, maskColor} = this.props;
+    const {show, onClick, maskColor, style} = this.props;
   
     return (
       <div className='ost-mask'>
@@ -86,7 +86,7 @@ export default class OstMask extends Component {
               'ost-mask-am-fade-in': show
             }
           )}
-          style={{background: maskColor || 'rgba(0, 0, 0, 0.4)'}}
+          style={{background: maskColor || 'rgba(0, 0, 0, 0.4)', ...style}}
           onClick={(e) => onClick && onClick(e)} />
       </div>
     );
