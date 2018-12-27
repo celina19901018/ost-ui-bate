@@ -1,5 +1,8 @@
 # OST UI 移动端组件库
 ---
+[![Build Status](https://travis-ci.org/Ironsub/ost-ui-bate.svg?branch=develop_travis)](https://travis-ci.org/Ironsub/ost-ui-bate)
+[![npm package](https://img.shields.io/npm/v/ost-ui.svg?style=flat-square)](https://www.npmjs.com/package/ost-ui)
+[![npm downloads](https://img.shields.io/npm/dm/ost-ui.svg)](https://www.npmjs.com/package/ost-ui)
 
 <br/>
 
