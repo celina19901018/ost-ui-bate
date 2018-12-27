@@ -7,8 +7,12 @@ notifications:
   - celina520524@163.com
 
 node_js:
+    - 8.0.0
+    - 8.5.0
     - 9.0.0
     - 9.5.0
+    - 10.0.0
+    - 10.14.2
 
 env:
   matrix:
