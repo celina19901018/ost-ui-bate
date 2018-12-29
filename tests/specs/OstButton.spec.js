@@ -8,6 +8,7 @@ describe('OstButton test section', function() {
   });
 
   it('should render correctly', function() {
+
     const component = Factory.createComponent(<OstButton>OK</OstButton>);
     expect(component.find('a').hasClass('ost-button')).to.equal(true);
     expect(component.find('.ost-button').text()).to.contain('OK');
@@ -23,6 +24,10 @@ describe('OstButton test section', function() {
 
     await defer(250);
     expect(component.find('a').hasClass('ost-button-warning')).to.equal(true);
+    component.setProps({ type: 'primary' });
+
+    await defer(250);
+    expect(component.find('a').hasClass('ost-button-primary')).to.equal(true);
     component.setProps({ size: 'small' });
 
     await defer(250);

@@ -12,7 +12,6 @@ testContent.keys().forEach(testContent);
 /**
  * require all components
  */
-// const componentContent = require.context('../components/', true, /\.js$/);
 const componentContent = require.context('./src/', false, /index.js$/);
 componentContent.keys().forEach(componentContent);
 
