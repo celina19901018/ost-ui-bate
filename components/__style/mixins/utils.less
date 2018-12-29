@@ -8,6 +8,17 @@
   white-space: nowrap;
 }
 
+// div内文本多行显示，默认3行，可设置行数值，超出部分以省略号显示
+.ellipsis-multi-line() {
+  display: -webkit-box;
+  box-orient: vertical;
+  overflow: hidden;
+}
+// 文本内省略号显示，颜色渐变
+.text-linear-gradient(@color: #fff) {
+  background: linear-gradient(to right, transparent, @color 55%);
+}
+
 // 文本不换行
 .nowrap() {
   white-space: nowrap;

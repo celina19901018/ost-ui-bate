@@ -1,16 +1,14 @@
 ## OstText 示例
 
+
+### 单行文本
   
 ```jsx
 :::$demo
 
     render() {
        return( 
-            <div style={{
-                    padding: '10px'
-            }}>
-                <OstText size="md" label="医院地址:" text="徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨"></OstText>
-                <OstWhiteSpace size="xl" />
+            <div className="ost-text-wrapClass">
                 <OstText multiLine={false} type="success" size="xs" text="徐汇凯滨路1号，徐汇凯滨路路2号，徐汇凯滨路1号，徐汇凯滨路路2号"></OstText>
                 <OstWhiteSpace />
                 <OstText type="primary" text="徐汇凯滨路1号，徐汇凯滨路路2号，徐汇凯滨路1号，徐汇凯滨路路2号"></OstText>
@@ -24,6 +22,35 @@
 :::$
 ```
 
+
+### 多行文本
+
+```jsx
+:::$demo
+    render() {
+        return (
+            <div className="ost-text-wrapClass">
+                <OstText size="md" text="徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨" ellipsis={false} textLineHeight={22} lineClamp={2}></OstText>
+                <OstWhiteSpace />
+                <OstText size="md" label="医院地址:" text="徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨路徐汇凯滨" textLineHeight={22} lineClamp={3} textBGColor="#fdfdfd"></OstText>
+            </div>
+        )
+    }
+:::$
+```
+
+```css
+<style>
+.ost-text-wrapClass {
+    padding: 10px;
+    background: #fdfdfd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-top: 10px;
+}
+</style>
+```
+
 ### 组件 props 说明
 | 事件名称 | 说明 | 类型 | 默认值 |
 |---------|--------|---------|---------|
@@ -34,3 +61,7 @@
 | multiLine | 文本是否支持多行显示 | boolean | true |
 | fixedCls | class前缀 | string | <p><code>ost-text</code></p> |
 | className | 样式类名 | string | 无 |
+| textBGColor | 文本背景色 | string | #fff |
+| textLineHeight | 文本行高 | number | 22px |
+| lineClamp | 文本行数 | number | 3 |
+| ellipsis | 是否显示省略号 | boolean | true |
