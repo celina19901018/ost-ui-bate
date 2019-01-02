@@ -160,6 +160,10 @@ class OstInput extends Component {
     this.state = { closeBtn: false };
   }
 
+  componentWillUnmount() {
+    clearTimeout(this._setTimeout);
+  }
+
   render() {
     const {
       defaultValue,
@@ -187,21 +191,25 @@ class OstInput extends Component {
           defaultValue={defaultValue}
           value={(maxLength && value) ? value.slice(0, maxLength) : value}
           onBlur={()=>{
-
             const _this = this;
 
-            setTimeout(() => {
+            _this._setTimeout = setTimeout(() => {
+                
+                onBlur && onBlur();
 
-            onBlur && onBlur();
-              
-            _this.setState({closeBtn: false}) 
+                _this.setState({closeBtn: false}) 
             }, 300);
           }}
           onFocus={()=>{
              onFocus && onFocus();
              this.setState({closeBtn: true}) 
           }}
-          onChange={e=> onChange && onChange(e)}
+          onChange={e=> {
+            if (maxLength) {
+              e.currentTarget.value = e.currentTarget.value.slice(0, maxLength);
+            }
+            onChange && onChange(e);
+          }}
           placeholder={placeholder}
         />
         {
