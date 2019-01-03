@@ -69,6 +69,7 @@ export default class OstNumKeyboard extends Component {
 
   componentDidMount() {
     this.upDateKeyStyle();
+    this.resetValue();
   }
 
   componentDidUpdate () {
@@ -80,6 +81,7 @@ export default class OstNumKeyboard extends Component {
     }
 
     keyBoardRef && keyBoardRef(this.box);
+    this.resetValue();
   }
 
   updateValue = (key) => {
@@ -100,14 +102,32 @@ export default class OstNumKeyboard extends Component {
 
     this.setState({value: _value});
     onChange && onChange(_value);
-   
+  }
+
+  // when close, reset value
+  resetValue = () => {
+    const {value} = this.state;
+    const {show, resetWhenClose} = this.props;
+    const _this = this;
+    
+    if (!show && value && resetWhenClose) {
+      setTimeout(() => this.setState({value: ''}), 300);
+    }
   }
 
   render() {
     const {children, onChange, show, style, showMask, lock} = this.props;
 
-    return ([
-                <OstMask show={show} key='00' bottom={'0'} right={'0'} left={'0'} unlock={lock ? false : true} style={{display: showMask ? null : 'none'}}>
+    return (
+                <OstMask 
+                    show={show} 
+                    key='00' 
+                    bottom={'0'} 
+                    right={'0'} 
+                    left={'0'} 
+                    unlock={lock ? false : true} 
+                    style={{display: showMask ? null : 'none'}}>
+
                     {children}
                     <div
                       ref={d => this.box = d}  
@@ -154,7 +174,7 @@ export default class OstNumKeyboard extends Component {
                       </div>
                     </div>
             </OstMask>
-        ]);
+        );
   }
 }
 

@@ -62,7 +62,6 @@ class SixBitCode  extends Component {
     if (_val !== newVal) {
       onChange && onChange(newVal);
     }
-
   }
 
   _eventListener = e => {
@@ -79,7 +78,6 @@ class SixBitCode  extends Component {
 
   theOnBlur = () => {
     const {isFocus} = this.state;
-    const {value, onBlur, onFocus, exception} = this.props;
 
     if (isFocus) {
       
@@ -108,17 +106,17 @@ class SixBitCode  extends Component {
   render() {
     const {SixBitCodeArr} = this;
     const {isFocus} = this.state;
-    const {value, onFocus, children, style, itemStyle} = this.props;
+    const {value, onFocus, style, itemStyle} = this.props;
 
     const vArr = value.split('');
 
     for (let i = 0; i < SixBitCodeArr.length; i++) {
+      
       if (vArr[i]) {
         SixBitCodeArr[i].value = vArr[i];
       } else {
         SixBitCodeArr[i].value = '';
       }
-      
     }
 
     return (

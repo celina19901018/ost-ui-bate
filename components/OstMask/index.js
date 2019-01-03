@@ -4,6 +4,43 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import preventBgScroll from './preventBgScroll'
 
+// API:
+// 
+// children //需要渲染的组件
+// 
+// popupInfo={
+//  rootDom:***, //接收弹层组件的DOM节点，如 document.body
+//  left:***, //相对位置
+//  top:*** //位置信息
+// }
+
+class RenderInBody extends Component {
+  componentDidMount() {
+
+    const {popupInfo} = this.props;
+    this.popup = document.createElement('div');
+    this.rootDom = popupInfo.rootDom;
+    this.rootDom.appendChild(this.popup);
+    //we can setAttribute of the p only in this way
+    this.popup.style.position = 'absolute';
+    this.popup.style.left = popupInfo.left + 'px';
+    this.popup.style.top = popupInfo.top + 'px';
+    this._renderLayer()
+  }
+  componentDidUpdate() {
+    this._renderLayer();
+  }
+  componentWillUnmount() {
+    this.rootDom.removeChild(this.popup);
+  }
+  _renderLayer() {
+    ReactDOM.render(this.props.children, this.popup);
+  }
+  render() {
+    return null;
+  }
+}
+
 export default class OstMask extends Component {
 
   state = {
@@ -114,6 +151,14 @@ export default class OstMask extends Component {
     );
   }
 
+  renderByReact15 = (component, container) => {
+    return(
+      <RenderInBody popupInfo={{rootDom: container}}>
+        {component} 
+      </RenderInBody>
+    )
+  }
+
   render() {
     const {show} = this.props;
 
@@ -121,7 +166,10 @@ export default class OstMask extends Component {
 
     if (!this.componentActivated) return null;
 
-    return ReactDOM.createPortal( this.getComponent(), this.getContainer());
+    if (ReactDOM.createPortal) return ReactDOM.createPortal( this.getComponent(), this.getContainer());
+
+    return this.renderByReact15( this.getComponent(), this.getContainer());
+
   }
 }
 
