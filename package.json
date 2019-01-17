@@ -6,7 +6,7 @@
   "scripts": {
     "dev-desktop": "cd build && node server.js ./site/webpack.desktop.config.js",
     "dev-mobile": "cd build && node server.js ./site/webpack.mobile.config.js",
-    "start": "npm run dev-mobile | npm run dev-desktop",
+    "start": "node ./build/start.js",
     "build-desktop": "rm -rf dist/site && cd build && webpack --c-path:./site/webpack.desktop.config.js --progress --mode production",
     "build-mobile": "cd build && webpack --c-path:./site/webpack.mobile.config.js --progress --mode production",
     "build": "npm run build-mobile && npm run build-desktop",
