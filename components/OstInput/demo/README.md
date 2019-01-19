@@ -1,19 +1,19 @@
-## OstDemo 示例
+## OstInput 示例
 
   
 ```jsx
 :::$demo
+class Demo extends Component {
+
     constructor(props) {
         super(props);
         this.state = { 
-            value: '', 
-            sixBitValue: '',
-            showKeyBoard: false 
+            value: ''
         };
     }
 
     render() {
-       const { value, sixBitValue } = this.state;
+       const { value } = this.state;
 
        return([
         
@@ -34,8 +34,30 @@
                 onDel={()=>this.setState({value: ''})}
                 onChange={e => this.setState({value: e.currentTarget.value})} />
           </OstList>
-        </OstList.card>,
+        </OstList.card>
+       ])
+    }
+}
+:::$
+```
 
+  
+```jsx
+:::$demo
+class Demo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { 
+            sixBitValue: '',
+            showKeyBoard: false 
+        };
+    }
+
+    render() {
+       const { sixBitValue } = this.state;
+
+       return([
         <OstList.card title="6位数字输入框" key='2'>
             <OstInput.sixBit
                 style={{padding: '10px 0'}}
@@ -58,6 +80,7 @@
              >
              </OstInput.sixBit>
         </OstList.card>,
+        
         <OstNumKeyboard
             resetWhenClose
             key='3'
@@ -66,5 +89,6 @@
             onChange={v => this.setState({sixBitValue: v})} />
        ])
     }
+}
 :::$
 ```
