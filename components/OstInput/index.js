@@ -62,7 +62,6 @@ class SixBitCode  extends Component {
     if (_val !== newVal) {
       onChange && onChange(newVal);
     }
-
   }
 
   _eventListener = e => {
@@ -79,7 +78,6 @@ class SixBitCode  extends Component {
 
   theOnBlur = () => {
     const {isFocus} = this.state;
-    const {value, onBlur, onFocus, exception} = this.props;
 
     if (isFocus) {
       
@@ -108,17 +106,17 @@ class SixBitCode  extends Component {
   render() {
     const {SixBitCodeArr} = this;
     const {isFocus} = this.state;
-    const {value, onFocus, children, style, itemStyle} = this.props;
+    const {value, onFocus, style, itemStyle} = this.props;
 
     const vArr = value.split('');
 
     for (let i = 0; i < SixBitCodeArr.length; i++) {
+      
       if (vArr[i]) {
         SixBitCodeArr[i].value = vArr[i];
       } else {
         SixBitCodeArr[i].value = '';
       }
-      
     }
 
     return (
@@ -160,6 +158,10 @@ class OstInput extends Component {
     this.state = { closeBtn: false };
   }
 
+  componentWillUnmount() {
+    clearTimeout(this._setTimeout);
+  }
+
   render() {
     const {
       defaultValue,
@@ -187,21 +189,37 @@ class OstInput extends Component {
           defaultValue={defaultValue}
           value={(maxLength && value) ? value.slice(0, maxLength) : value}
           onBlur={()=>{
-
             const _this = this;
 
-            setTimeout(() => {
+            _this._setTimeout = setTimeout(() => {
+                
+                onBlur && onBlur();
 
-            onBlur && onBlur();
-              
-            _this.setState({closeBtn: false}) 
+                _this.setState({closeBtn: false}) 
             }, 300);
           }}
           onFocus={()=>{
              onFocus && onFocus();
              this.setState({closeBtn: true}) 
           }}
-          onChange={e=> onChange && onChange(e)}
+          onChange={e=> {
+
+            let _e;
+
+            if (maxLength) {
+                 _e = {
+                  ...e,
+                  currentTarget: {
+                    ...e.currentTarget,
+                    value: e.currentTarget.value.slice(0, maxLength)
+                  }
+                }
+            } else {
+              _e = e;
+            }
+
+            onChange && onChange(_e);
+          }}
           placeholder={placeholder}
         />
         {

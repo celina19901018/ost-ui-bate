@@ -53,28 +53,35 @@ export default class OstNumKeyboard extends Component {
     
     if (!this.box) return;
 
-    this.setState({
-      keyStyle: {
-                width: `${this.box && this.box.clientWidth * 0.31}px`,
-                height: `${this.box && this.box.clientWidth * 0.12}px`,
-                marginLeft: `${this.box && this.box.clientWidth * 0.0175}px`,
-                marginTop: `${this.box && this.box.clientWidth * 0.0175}px`
-              }
-    })
+    const _this = this;
+
+    setTimeout(() => {
+       _this.setState({
+                keyStyle: {
+                          width: `${_this.box.clientWidth * 0.31}px`,
+                          height: `${_this.box.clientWidth * 0.12}px`,
+                          marginLeft: `${_this.box.clientWidth * 0.0175}px`,
+                          marginTop: `${_this.box.clientWidth * 0.0175}px`
+                        }
+      })
+    }, 100);
   }
 
   componentDidMount() {
     this.upDateKeyStyle();
+    this.resetValue();
   }
 
   componentDidUpdate () {
-    const {show} = this.props;
+    const {show, keyBoardRef} = this.props;
     
     if ((!this.state.keyStyle.width) && show) {
       
       this.upDateKeyStyle();
     }
-    
+
+    keyBoardRef && keyBoardRef(this.box);
+    this.resetValue();
   }
 
   updateValue = (key) => {
@@ -95,14 +102,33 @@ export default class OstNumKeyboard extends Component {
 
     this.setState({value: _value});
     onChange && onChange(_value);
-   
+  }
+
+  // when close, reset value
+  resetValue = () => {
+    const {value} = this.state;
+    const {show, resetWhenClose} = this.props;
+    const _this = this;
+    
+    if (!show && value && resetWhenClose) {
+      setTimeout(() => this.setState({value: ''}), 300);
+    }
   }
 
   render() {
-    const {onChange, show, style} = this.props;
+    const {children, onChange, show, style, showMask, lock} = this.props;
 
-    return ([ 
-                <OstMask show={show} key='00' style={{display: 'none'}}>
+    return (
+                <OstMask 
+                    show={show} 
+                    key='00' 
+                    bottom={'0'} 
+                    right={'0'} 
+                    left={'0'} 
+                    unlock={lock ? false : true} 
+                    style={{display: showMask ? null : 'none'}}>
+
+                    {children}
                     <div
                       ref={d => this.box = d}  
                       className="ost-numKeyboard"  
@@ -148,7 +174,7 @@ export default class OstNumKeyboard extends Component {
                       </div>
                     </div>
             </OstMask>
-        ]);
+        );
   }
 }
 

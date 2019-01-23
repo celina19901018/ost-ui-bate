@@ -45,7 +45,10 @@
                     console.log('onChange>>>', v)
                 }}
                 onBlur={(v) => {
-                    this.setState({showKeyBoard: false});
+                    this.setState({
+                        showKeyBoard: false, 
+                        sixBitValue: ''
+                    });
                     console.log('onBlur callback>>>', v);
                 }}
                 onFocus={(v) => {
@@ -56,6 +59,7 @@
              </OstInput.sixBit>
         </OstList.card>,
         <OstNumKeyboard
+            resetWhenClose
             key='3'
             maxLength='6'
             show={this.state.showKeyBoard} 

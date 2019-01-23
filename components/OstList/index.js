@@ -10,12 +10,19 @@ import tipsIconSvg from './tipsIcon.svg';
 class Item extends Component {
 
   render() {
-    const { text, style, onClick, arrowTo, placeholder } = this.props;
+    const { text, style, onClick, arrowTo, placeholder, disabled } = this.props;
 
 
     return (
-        <div className="ost-card-item" style={style} onClick={onClick}>
-          <span className="ost-card-item-text" style={{color: !text ? '#BABFC9' : null}}>
+        <div className="ost-card-item" style={style} onClick={() => !disabled && onClick()}>
+          <span 
+            className={classnames(
+              "ost-card-item-text",
+              {
+                "ost-card-item-text-placeholder": !text,
+                "ost-card-item-text-disabled": disabled
+              }
+            )}>
             {text ? text : placeholder}
           </span>
           <span className="ost-card-item-icon">
