@@ -44,7 +44,8 @@ export default class OstButton extends Component {
       inline,
       disabled,
       loading,
-      iconType
+      iconType,
+      onClick
     } = this.props;
     const wrapClass = classnames(fixedCls, className, {
       [`${fixedCls}-${type}`]: type,
@@ -58,7 +59,7 @@ export default class OstButton extends Component {
     })
     const kids = React.Children.map(children, this.insertSpace);
     return (
-      <a className={wrapClass}>{kids}</a>
+      <a className={wrapClass} onClick={onClick}>{kids}</a>
     )
   }
 }
