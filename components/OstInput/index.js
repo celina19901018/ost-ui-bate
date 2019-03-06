@@ -203,10 +203,22 @@ class OstInput extends Component {
              this.setState({closeBtn: true}) 
           }}
           onChange={e=> {
+
+            let _e;
+
             if (maxLength) {
-              e.currentTarget.value = e.currentTarget.value.slice(0, maxLength);
+                 _e = {
+                  ...e,
+                  currentTarget: {
+                    ...e.currentTarget,
+                    value: e.currentTarget.value.slice(0, maxLength)
+                  }
+                }
+            } else {
+              _e = e;
             }
-            onChange && onChange(e);
+
+            onChange && onChange(_e);
           }}
           placeholder={placeholder}
         />

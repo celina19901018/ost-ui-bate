@@ -8,6 +8,7 @@ export default class OstText extends React.Component {
     size: 'md',
     multiLine: true// 是否多行显示，默认多行显示
   }
+
   render() {
     const {
       fixedCls,
@@ -18,13 +19,15 @@ export default class OstText extends React.Component {
       type,
       size
     } = this.props;
+
     const wrapClass = classnames(fixedCls, className, {
       [`${fixedCls}-${type}`]: type,
       [`${fixedCls}-${size}`]: size
     })
+    
     return <div className={wrapClass}>
       {label && <label className="ost-text-label">{label}</label>}
-      <p className={!multiLine && 'ost-text-single-line'}>{text}</p>
+      <p className={ classnames({'ost-text-single-line': !multiLine}) }>{text}</p>
     </div>
   }
 }

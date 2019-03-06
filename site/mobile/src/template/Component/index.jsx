@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, {Component} from 'react';
 import { transform } from 'babel-standalone'
 import './index.less';
 
-export default class Component extends React.Component {
+export default class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     // console.log('phone location===>', window.location.href);
@@ -16,6 +16,7 @@ export default class Component extends React.Component {
   importMd = () => {
 
     import(`../../../../../components`).then(Module =>{
+
       Object.keys(Module).forEach(_key => {
 
         if (/MENU_ITEM*./ig.test(_key)) return;
@@ -58,16 +59,34 @@ export default class Component extends React.Component {
     data.match(demoRex).forEach((ele, i) => {
       const _demo = ele.replace(demoFlagRex, '');
 
-      const cptStr =  `class Cpt${i} extends React.Component {
-            ${_demo}
-      }`
+      if (/extends\s+React\.Component|extends\s+Component/.test(_demo)) {
 
-        _componentStr  += cptStr;
-        _domStr += `<Cpt${i}/>`;
+          const className = _demo.match(/(class)\s+(.*)\s+(extends)/)[2];
+
+          _componentStr  += _demo.replace(className, `${className}Cpt${i}`);
+          _domStr += `<${className}Cpt${i} />`;
+
+//           const rexCpt = new RegExp(`<\\s*${className}Cpt${i}\\s+`, 'g');
+
+//           if (rexCpt.test(_componentStr)) {
+//             throw new Error(
+//               `can\`t use component self, please check you readme demo '${key}'`
+//             );
+//           }
+
+      } else {
+
+          const cptStr =  `class Cpt${i} extends React.Component {
+                ${_demo}
+          }`
+
+          _componentStr  += cptStr;
+          _domStr += `<Cpt${i}/>`;
+      }
     })
 
-    const args = ['context', 'React', 'ReactDOM'];
-    const argv = [this, React, ReactDOM];
+    const args = ['context', 'React', 'ReactDOM', 'Component'];
+    const argv = [this, React, ReactDOM, Component];
     
     for (const _key in Module) {
         args.push(_key);

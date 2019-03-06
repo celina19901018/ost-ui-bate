@@ -2,9 +2,8 @@
 
   
 ```jsx
-class Demo extends Component {
-
 :::$demo
+class Demo extends Component {
 
     constructor(props) {
         super(props);
@@ -41,14 +40,13 @@ class Demo extends Component {
             </div>
        )
     }
-:::$
 }
+:::$
 ```
 ```jsx
+:::$demo
 class Demo extends Component {
     
-:::$demo
-
     constructor(props) {
         super(props);
         this.state = {
@@ -82,6 +80,6 @@ class Demo extends Component {
             </div>
        )
     }
-:::$
 }
+:::$
 ```
