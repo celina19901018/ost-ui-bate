@@ -5,7 +5,7 @@ import Factory, { destroyElement, defer } from '../utils/factory';
 describe('OstHeader test section', function() {
 
   after(function() {
-    // destroyElement('#App');
+    destroyElement('#App');
   });
 
   it('should render correctly', function() {
@@ -33,7 +33,14 @@ describe('OstHeader test section', function() {
 
     await defer(200);
     expect(component.find('.ost-header-title').text()).to.equal('My title 5');
-    const title = 'My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5';
+    const title = 'My title 5 My title 5 My title 5 My title 5 My title 5 My title 5' +
+      ' My title 5 My title 5 My title 5 My title 5My title 5 My title 5 My title 5 ' +
+      ' My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5' +
+      ' My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5' +
+      ' My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5' +
+      ' My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5' +
+      ' My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5' +
+      ' My title 5 My title 5 My title 5 My title 5 My title 5 My title 5 My title 5';
     component.setProps({ title: title });
 
     await defer(200);
