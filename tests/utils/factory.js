@@ -105,4 +105,27 @@ export const defer = (delay = 0) => {
   })
 };
 
+/**
+ * 监听
+ * @param obj 被监听的对象
+ * @param prop 传入被监听的属性名和回调方法
+ */
+export const monitor = (obj, props) => {
+  const describe = Object.create(null);
+  Object.keys(props).forEach(propName => {
+    describe[propName] = {
+      get: function() {
+        if(typeof obj[propName] === 'function') {
+          return function() {
+            typeof props[propName] === 'function' && props[propName]();
+          }
+        } else {
+          typeof props[propName] === 'function' && props[propName]();
+        }
+      }
+    };
+  });
+  Object.defineProperties(obj, describe);
+};
+
 export default new Factory();
