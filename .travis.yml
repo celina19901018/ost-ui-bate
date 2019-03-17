@@ -42,3 +42,4 @@ script:
 branches:
   only:
   - develop_travis
+  - master
