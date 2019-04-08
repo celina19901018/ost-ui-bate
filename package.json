@@ -9,7 +9,7 @@
     "start": "node ./build/start.js",
     "build-desktop": "rm -rf dist/site && cd build && webpack --c-path:./site/webpack.desktop.config.js --progress --mode production",
     "build-mobile": "cd build && webpack --c-path:./site/webpack.mobile.config.js --progress --mode production",
-    "build": "npm run build-mobile && npm run build-desktop",
+    "build": " npm run build-desktop && npm run build-mobile",
     "test": "rm -rf tests/coverage && cross-env BABEL_ENV=test karma start karma.conf.js --single-run",
     "test:watch": "rm -rf tests/coverage && cross-env BABEL_ENV=test karma start karma.conf.js --auto-watch",
     "babel-cli": "rm -rf dist/npm && babel components/ --out-dir dist/npm  --copy-files"
