@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{66:function(n,e){n.exports="## OstDemo 示例\n\n  \n```jsx\n:::$demo\n\n    render() {\n       return( \n            <div style={{ padding: '10px' }}>\n                <OstDemo />\n            </div>\n       )\n    }\n:::$\n```\n"}}]);

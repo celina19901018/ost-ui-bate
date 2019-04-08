@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[16],{81:function(o,e){o.exports="### 组件 props 说明\n| 时间名称 | 说明 | 类型 | 默认值 |\n|----------|---------|---------|----------|\n| size | <p>上下留白的间距，<code>xs</code>、<code>sm</code>、<code>md</code>、<code>lg</code>、<code>xl</code></p> | string | md |\n| className | 留白样式类名 | string | 无 |"}}]);
